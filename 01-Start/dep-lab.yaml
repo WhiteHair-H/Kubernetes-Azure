@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dep-mainui
+  annotations:
+    kubernetes.io/change-cause: "update image 2.4"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: main
+    matchExpressions:
+    - {key: version, operator: In, values: ["2.2", "2.4"]}
+  template:
+    metadata:
+      name: apache-pod
+      labels:
+        app: main
+        version: "2.2"
+    spec:
+      containers:
+      - name: httpd-container
+        image: httpd:2.4

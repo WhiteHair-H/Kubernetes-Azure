@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: ds-mainui
+spec:
+  selector:
+    matchLabels:
+      app: apache
+      rel: stable
+  template:
+    metadata:
+      name: apache
+      labels:
+        app: apache
+        rel: stable
+    spec:
+      nodeSelector:
+        disktype: ssd
+      containers:
+      - name: web-container
+        image: httpd:2.2
+        resources:
+          requests:
+            cpu: 500m
