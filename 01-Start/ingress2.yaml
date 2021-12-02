@@ -6,6 +6,10 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
 spec:
+  tls:
+  - hosts:
+    secretName: tls-secret
+
   defaultBackend:
     service:
       name: nginx
